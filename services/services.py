@@ -31,7 +31,7 @@ async def fetch_and_store_weather_data(user_id: str):
     for city_name in CITIES:
         weather_info = await fetch_weather_data(city_name)
         data.append(weather_info)
-        await asyncio.sleep(1)  # Respect the rate limit
+        await asyncio.sleep(1)
 
     weather_data = WeatherData(
         user_id=user_id,
