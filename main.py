@@ -20,6 +20,7 @@ async def post_weather(request: WeatherRequest):
     await fetch_and_store_weather_data(request.user_id)
     return  {"message": "Weather data collection started"}
 
+
 @app.get("/weather/{user_id}", response_model=WeatherDataSchema)
 async def get_weather(user_id: str):
     db = SessionLocal()
