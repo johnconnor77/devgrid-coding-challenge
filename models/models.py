@@ -8,5 +8,4 @@ class WeatherData(Base):
     timestamp = Column(DateTime)
     data = Column(JSON)
 
-# Ensure tables are created
-# Base.metadata.create_all(bind=engine)
+
