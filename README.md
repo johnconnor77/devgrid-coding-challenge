@@ -30,7 +30,7 @@ To run the FastAPI application, follow these steps:
 1. Start the Docker containers:
 
     ```sh
-    docker-compose up
+    docker-compose run web
    
 2. The FastAPI application will be available at http://localhost:8000.
 
@@ -43,12 +43,8 @@ To run the FastAPI application, follow these steps:
 
 To run all tests for the FastAPI application, follow these steps:
 
-1. Start the Docker containers:
-
-    ```sh
-    docker-compose up
-   
-2. Run the tests command in other shell:
+  
+1. Run the tests command :
 
     ```sh
     docker-compose run tests
@@ -61,12 +57,6 @@ To run all tests for the FastAPI application, follow these steps:
 1. Start the Docker containers:
 
     ```sh
-    docker-compose up
+    docker-compose run coverage
 
-2. Run the coverage command in other shell:
-
-    ```sh
-    docker-compose run coverage   
-
-
-3. Check the test results in the /htmlcov/index.html
+2. Check the test results in the /htmlcov/index.html
