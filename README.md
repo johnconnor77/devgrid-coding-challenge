@@ -4,15 +4,13 @@ This project is a FastAPI application that collects data from the Open Weather A
 
 ## Table of Contents
 
-- [Docker Installation](#docker-installation)
+- [Installation and Setup](#docker-installation)
 - [Running the FastAPI App](#running-the-fastapi-app)
 - [Running Tests](#running-tests)
 - [Running Coverage](#running-coverage)
 
 
-## Docker Installation
-
-To dockerize the FastAPI application, follow these steps:
+## Installation and Setup
 
 1. Ensure you have Docker and Docker Compose installed on your machine. You can download them from [Docker's official website](https://www.docker.com/get-started).
 
