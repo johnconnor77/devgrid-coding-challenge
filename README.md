@@ -53,7 +53,7 @@ To run all tests for the FastAPI application, follow these steps:
     ```sh
     docker-compose run tests
    
-3. Check the test results in the /htmlcov/index.html
+3. Check the test results in terminal
 
 
 ## Running Coverage 
