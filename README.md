@@ -20,7 +20,6 @@ To dockerize the FastAPI application, follow these steps:
 
    ```sh
    git clone https://github.com/johnconnor77/devgrid-coding-challenge.git
-   cd fastapi-weather-service
 
 3. Build the Docker image:
 
