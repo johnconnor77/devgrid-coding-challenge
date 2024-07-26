@@ -27,7 +27,7 @@ async def fetch_weather_data(city_id: int) -> Dict[str, Any]:
         }
 
 
-async def fetch_and_store_weather_data(user_id: str, cities_list: list = CITIES):
+async def fetch_and_store_weather_data(user_id: str, cities_list: list = CITIES) -> None:
     db = SessionLocal()
     for city_id in cities_list:
         weather_info = await fetch_weather_data(city_id)

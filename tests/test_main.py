@@ -6,15 +6,6 @@ from main import app
 from unittest.mock import patch
 
 
-def override_get_db():
-    try:
-        db = TestingSessionLocal()
-        yield db
-    finally:
-        db.close()
-
-
-app.dependency_overrides[TestingSessionLocal] = override_get_db
 client = TestClient(app)
 
 
@@ -30,7 +21,7 @@ def setup_db_fixture():
     Base.metadata.drop_all(bind=engine)
 
 
-def mock_fetch_weather_data(city_id):
+def mock_fetch_weather_data(city_id: int) -> dict:
     return {
         "coord": {"lon": 139, "lat": 35},
         "weather": [{"id": 800, "main": "Clear", "description": "clear sky", "icon": "01n"}],
@@ -77,6 +68,12 @@ def test_get_weather_user_id_not_found(client_fixture, setup_db_fixture):
     assert response.json() == {"detail": "User ID not found"}
 
 
+def test_get_weather_user_id_empty(client_fixture, setup_db_fixture):
+    response = client_fixture.get("/weather/ ")
+    assert response.status_code == 422
+    assert response.json() == {"detail": "User ID cannot be empty"}
+
+
 @patch('services.services.fetch_weather_data', side_effect=mock_fetch_weather_data)
 def test_get_weather_percentage_uploaded(mock_fetch, client_fixture, setup_db_fixture):
     client_fixture.post("/weather/", json={"user_id": "test_user"})
@@ -103,10 +100,12 @@ def test_get_weather_percentage_no_data(mock_fetch, client_fixture, setup_db_fix
 
 def test_post_weather_invalid_user_id(client_fixture, setup_db_fixture):
     response = client_fixture.post("/weather/", json={"user_id": ""})
-    assert response.status_code == 422  # Unprocessable Entity
+    assert response.status_code == 422
 
 
 def test_post_weather_missing_user_id(client_fixture, setup_db_fixture):
     response = client_fixture.post("/weather/", json={})
-    assert response.status_code == 422  # Unprocessable Entity
+    assert response.status_code == 422
+
+
 

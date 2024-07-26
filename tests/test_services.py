@@ -79,7 +79,7 @@ async def test_fetch_and_store_weather_data(mock_weather_data, db_session):
 
 
 @pytest.mark.asyncio
-async def test_fetch_and_store_weather_data(mock_weather_data):
+async def test_fetch_and_store_weather_data_on_calls(mock_weather_data):
     mock_db_session = MagicMock()
     mock_db_session.query.return_value.filter.return_value.first.return_value = None
     mock_db_session.commit = MagicMock()
@@ -182,3 +182,4 @@ async def test_fetch_and_store_weather_data_api_error(mock_open_weather_api_key)
         with pytest.raises(Exception) as excinfo:
             await fetch_and_store_weather_data(user_id)
         assert "API error" in str(excinfo.value)
+

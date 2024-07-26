@@ -13,6 +13,10 @@ class WeatherRequest(BaseModel):
         return v
 
 
+class PostWeatherResponse(BaseModel):
+    message: str
+
+
 class WeatherData(BaseModel):
     user_id: str
     timestamp: datetime
@@ -20,3 +24,14 @@ class WeatherData(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class GetWeatherResponse(BaseModel):
+    user_id: str
+    timestamp: datetime
+    data: str
+    percentage_uploaded: str
+
+
+
+
