@@ -27,10 +27,10 @@ This project is a FastAPI application that collects data from the Open Weather A
 ## Running the FastAPI App
 To run the FastAPI application, follow these steps:
 
-1. Start the Docker containers:
+1. Start the Docker web container:
 
     ```sh
-    docker-compose run web
+    docker-compose run -p 8000:8000 web
    
 2. The FastAPI application will be available at http://localhost:8000.
 
