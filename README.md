@@ -41,7 +41,7 @@ To run the FastAPI application, follow these steps:
  3.1 Video recorded with jam: https://jam.dev/c/e746470c-cf3c-4f32-a4c3-2b8b202748c3
 
 
- 3.2 Post Request http://localhost:8000/weather
+ 3.2 Post Request
 
  While Uploading the data
 
@@ -84,6 +84,10 @@ To run all tests for the FastAPI application, follow these steps:
    
 3. Check the test results in terminal
 
+4. Example 
+
+![tests](https://github.com/user-attachments/assets/aa4c0002-0325-4cb9-8e52-7e229242eec6)
+
 
 ## Running Coverage 
 
@@ -93,3 +97,6 @@ To run all tests for the FastAPI application, follow these steps:
     docker-compose run coverage
 
 2. Check the test results in the /htmlcov/index.html
+
+![cov](https://github.com/user-attachments/assets/2fe19731-dfa8-4c87-be05-040281d2a63f)
+
