@@ -49,15 +49,27 @@ To run all tests for the FastAPI application, follow these steps:
 1. Start the Docker containers:
 
     ```sh
-    docker-compose up --build
+    docker-compose up
    
-2. Run the tests:
+2. Run the tests command in other shell:
 
     ```sh
-    docker-compose exec -it fastapi_app pytest
+    docker-compose run tests
    
-3. Check the test results in the terminal.
+3. Check the test results in the /htmlcov/index.html
 
 
 ## Running Coverage 
 
+1. Start the Docker containers:
+
+    ```sh
+    docker-compose up
+
+2. Run the coverage command in other shell:
+
+    ```sh
+    docker-compose run coverage   
+
+
+3. Check the test results in the /htmlcov/index.html
