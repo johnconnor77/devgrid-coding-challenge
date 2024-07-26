@@ -72,6 +72,7 @@ async def test_fetch_and_store_weather_data(mock_weather_data, db_session):
         user_id = "test_user"
         await fetch_and_store_weather_data(user_id, cities_list=CITIES_TEST)
 
+        # Ensure data was inserted correctly
         record = db_session.query(WeatherData).filter_by(user_id=user_id).first()
         assert record is not None
         assert json.loads(record.data)[0]["city_id"] == CITIES_TEST[0]
@@ -164,3 +165,20 @@ async def test_fetch_and_store_weather_data_exception(db_session):
 
         record = db_session.query(WeatherData).filter_by(user_id=user_id).first()
         assert record is None
+
+
+@pytest.mark.asyncio
+async def test_fetch_and_store_weather_data_api_error(mock_open_weather_api_key):
+    user_id = "test_user"
+
+    mock_session = MagicMock()
+    mock_query = mock_session.query.return_value
+    mock_query.filter.return_value.first.return_value = None
+
+    with patch("services.services.fetch_weather_data", new_callable=AsyncMock) as mock_fetch_weather_data, \
+            patch("services.services.SessionLocal", return_value=mock_session):
+        mock_fetch_weather_data.side_effect = Exception("API error")
+
+        with pytest.raises(Exception) as excinfo:
+            await fetch_and_store_weather_data(user_id)
+        assert "API error" in str(excinfo.value)
