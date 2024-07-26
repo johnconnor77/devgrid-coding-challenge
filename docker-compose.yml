@@ -6,6 +6,8 @@ services:
     container_name: fastapi_app
     ports:
       - "8000:8000"
+    depends_on:
+      - postgres
     volumes:
       - .:/app
     environment:
@@ -14,19 +16,39 @@ services:
       bash -c "alembic upgrade head &&
                uvicorn main:app --host 0.0.0.0 --port 8000"
 
-  tests:
-    build: .
-    volumes:
-      - .:/app
-    depends_on:
-      - web
-    command: pytest
+  postgres:
+      environment:
+        - POSTGRES_NAME=postgres
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=postgres
+        - POSTGRES_DB=test-db
+      image: postgres:13
+      ports:
+        - 5432:5432
+      volumes:
+        - pgdata:/var/lib/postgresql/data
+      healthcheck:
+        test: [ "CMD", "pg_isready", "-q", "-d", "test-db", "-U", "postgres" ]
+        interval: 10s
+        timeout: 5s
+        retries: 5
 
-  coverage:
-    build: .
-    volumes:
-      - .:/app
-    depends_on:
-      - web
-    command: >
-      bash -c "pytest --cov=. --cov-report=html"
+#  tests:
+#    build: .
+#    volumes:
+#      - .:/app
+#    depends_on:
+#      - web
+#    command: pytest
+#
+#  coverage:
+#    build: .
+#    volumes:
+#      - .:/app
+#    depends_on:
+#      - web
+#    command: >
+#      bash -c "pytest --cov=. --cov-report=html"
+
+volumes:
+    pgdata: {}
