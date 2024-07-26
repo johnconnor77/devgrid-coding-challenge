@@ -4,7 +4,7 @@ This project is a FastAPI application that collects data from the Open Weather A
 
 ## Table of Contents
 
-- [Installation and Setup](#docker-installation)
+- [Installation and Setup](#installation-and-setup)
 - [Running the FastAPI App](#running-the-fastapi-app)
 - [Running Tests](#running-tests)
 - [Running Coverage](#running-coverage)
